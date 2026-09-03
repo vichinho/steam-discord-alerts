@@ -123,7 +123,7 @@ test('pausa global no toca red ni base de datos', async () => {
   const h = harness(); try { h.c.enabled = false; const r = await h.run(); assert.equal(r.stats.status, 'disabled'); assert.equal(r.budget.requests, 0); } finally { h.close(); }
 });
 test('resumen diario agrupa ofertas y no se repite el mismo día', async () => {
-  const h = harness(Array.from({ length: 4 }, (_, i) => game({ appId: 10001 + i, title: `Oferta ${i + 1}`, discountPercent: 50 + i, currentAmount: 1000000 - i * 10000 })));
+  const h = harness(Array.from({ length: 4 }, (_, i) => game({ appId: 10001 + i, title: `Oferta ${i + 1}`, discountPercent: 50 + i, currentAmount: 1000000 - i * 20000 })));
   try {
     h.c.deals.mode = 'daily-digest'; h.c.deals.maxItems = 3; h.c.deals.perRun = 1; h.c.deals.perDay = 1; h.c.deals.digestAt = '12:00';
     const first = await h.run(); assert.equal(first.stats.sent, 1); assert.equal(h.sent.length, 1);
@@ -132,5 +132,19 @@ test('resumen diario agrupa ofertas y no se repite el mismo día', async () => {
     assert.match(h.sent[0]!.payload!.embeds![0]!.title, /^1\. Oferta/);
     assert.equal((await h.run()).stats.sent, 0);
     h.now += DAY; assert.equal((await h.run()).stats.sent, 1); assert.equal(h.sent.length, 2);
+    assert.deepEqual(h.sent[1]!.games.map(g => g.appId), [10001]);
+    h.now += DAY; assert.equal((await h.run()).stats.sent, 0); assert.equal(h.sent.length, 2);
+  } finally { h.close(); }
+});
+
+test('resumen diario excluye juegos enviados durante siete días y luego permite reutilizarlos', async () => {
+  const h = harness([game()]);
+  try {
+    h.c.deals.mode = 'daily-digest'; h.c.deals.maxItems = 10; h.c.deals.digestAt = '12:00';
+    assert.equal((await h.run()).stats.sent, 1);
+    h.now += DAY; const repeated = await h.run();
+    assert.equal(repeated.stats.sent, 0); assert.equal(repeated.stats.omitted.recently_sent, 1);
+    h.now += 6 * DAY; assert.equal((await h.run()).stats.sent, 1);
+    assert.equal(h.sent.length, 2);
   } finally { h.close(); }
 });

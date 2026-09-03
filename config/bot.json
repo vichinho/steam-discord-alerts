@@ -9,7 +9,7 @@
   "amountScale": 100,
   "language": "es-CL",
   "timezone": "America/Santiago",
-  "deals": { "mode": "daily-digest", "minDiscountPercent": 50, "maxAmount": null, "genres": [], "includeEarlyAccess": true, "perRun": 1, "perDay": 1, "digestAt": "12:00", "maxItems": 10 },
+  "deals": { "mode": "daily-digest", "minDiscountPercent": 50, "maxAmount": null, "genres": [], "includeEarlyAccess": true, "perRun": 1, "perDay": 1, "digestAt": "12:00", "maxItems": 10, "repeatWindowDays": 7 },
   "releases": { "genres": [], "includeEarlyAccess": true, "windowDays": 7, "discoveryHours": 6, "digestAt": "20:00", "maxItems": 10 },
   "rustItems": {
     "appId": 252490,
@@ -52,6 +52,6 @@
     "cloudValidated": true,
     "pageSize": 10,
     "maxPages": 5,
-    "coverage": "Ofertas: primera página de juegos rebajados ordenada por reseñas, hasta 10 candidatos y resumen diario; se ordenan localmente por descuento. Estrenos: hasta 5 páginas de 10 candidatos por recorrido. Cobertura parcial aceptada por el propietario; adaptador de tienda no documentado por Valve y sujeto a pausa si cambia o rechaza el acceso."
+    "coverage": "Ofertas: hasta 5 páginas de 10 juegos rebajados ordenadas por reseñas; se omiten los publicados durante los últimos 7 días antes de verificar hasta 10 candidatos y ordenarlos localmente por descuento. Estrenos: hasta 5 páginas de 10 candidatos por recorrido. Cobertura parcial aceptada por el propietario; adaptador de tienda no documentado por Valve y sujeto a pausa si cambia o rechaza el acceso."
   }
 }

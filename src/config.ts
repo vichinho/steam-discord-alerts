@@ -2,7 +2,7 @@ import defaults from '../config/bot.json' with { type: 'json' };
 export interface Config {
   version: number; enabled: boolean; sendEnabled: boolean; destinationId: string; webhookId: string | null;
   country: string; currency: string; amountScale: number; language: string; timezone: string;
-  deals: { mode: 'instant' | 'daily-digest'; minDiscountPercent: number; maxAmount: number | null; genres: string[]; includeEarlyAccess: boolean; perRun: number; perDay: number; digestAt: string; maxItems: number };
+  deals: { mode: 'instant' | 'daily-digest'; minDiscountPercent: number; maxAmount: number | null; genres: string[]; includeEarlyAccess: boolean; perRun: number; perDay: number; digestAt: string; maxItems: number; repeatWindowDays: number };
   releases: { genres: string[]; includeEarlyAccess: boolean; windowDays: number; discoveryHours: number; digestAt: string; maxItems: number };
   rustItems: {
     appId: number;
@@ -22,7 +22,7 @@ export function readConfig(input: unknown = defaults): Config {
   for (const flag of [c.enabled, c.sendEnabled, c.source.enabled, c.source.accessReviewed, c.source.coverageAccepted, c.source.cloudValidated, c.deals.includeEarlyAccess, c.releases.includeEarlyAccess,
     official.enabled, official.accessReviewed, official.coverageAccepted, official.cloudValidated, official.includeNewItems,
     market.enabled, market.accessReviewed, market.coverageAccepted, market.cloudValidated]) if (typeof flag !== 'boolean') fail();
-  if (!['instant', 'daily-digest'].includes(c.deals.mode) || !int(c.deals.minDiscountPercent, 0, 100) || !int(c.deals.perRun, 1, 5) || !int(c.deals.perDay, 1, 20) || !int(c.deals.maxItems, 1, 10)) fail();
+  if (!['instant', 'daily-digest'].includes(c.deals.mode) || !int(c.deals.minDiscountPercent, 0, 100) || !int(c.deals.perRun, 1, 5) || !int(c.deals.perDay, 1, 20) || !int(c.deals.maxItems, 1, 10) || !int(c.deals.repeatWindowDays, 1, 30)) fail();
   if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(c.deals.digestAt)) fail();
   if (c.deals.maxAmount !== null && !int(c.deals.maxAmount, 0, Number.MAX_SAFE_INTEGER)) fail();
   if (!int(c.releases.maxItems, 1, 10) || !int(c.releases.windowDays, 1, 7) || !int(c.releases.discoveryHours, 6, 168)) fail();

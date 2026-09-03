@@ -52,11 +52,13 @@ test('ausencia no termina oferta; fin explícito abre un período nuevo', () => 
   assert.equal(ended.active, false);
   const again = observeDeal(g, ended, false); assert.equal(again.period, 2); assert.equal(shouldAnnounce(g, again, NOW), true);
 });
-test('configuración cambia línea base por filtros pero no por horario', () => {
+test('configuración cambia línea base por filtros pero no por horario o ventana de repetición', () => {
   const c = config(), key = configKey(c); c.releases.digestAt = '21:00'; assert.equal(configKey(c), key);
+  c.deals.repeatWindowDays = 14; assert.equal(configKey(c), key);
   c.deals.minDiscountPercent = 40; assert.notEqual(configKey(c), key);
   assert.throws(() => readConfig({ ...c, sendEnabled: true, webhookId: null }), /INVALID_CONFIG/);
   assert.throws(() => readConfig({ ...c, deals: { ...c.deals, perRun: 6 } }), /INVALID_CONFIG/);
+  assert.throws(() => readConfig({ ...c, deals: { ...c.deals, repeatWindowDays: 31 } }), /INVALID_CONFIG/);
 });
 test('Santiago calcula fecha y horario a ambos lados de sus cambios de hora', () => {
   assert.deepEqual(localTime(Date.parse('2026-09-06T03:30:00Z'), 'America/Santiago'), { day: '2026-09-05', time: '23:30' });

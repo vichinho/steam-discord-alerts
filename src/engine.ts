@@ -81,14 +81,33 @@ export async function runOnce(o: EngineOptions): Promise<RunStats> {
         const remaining = 10 - budget.details;
         const releaseDue = started >= job.releaseNextAt;
         const releaseLimit = releaseDue && !dailyDue ? Math.min(5, Math.floor(remaining / 2)) : 0;
-        const dealLimit = c.deals.mode === 'daily-digest' ? (dailyDue ? Math.min(c.deals.maxItems, remaining) : 0) : remaining - releaseLimit;
+        const dealLimit = c.deals.mode === 'daily-digest' ? (dailyDue ? remaining : 0) : remaining - releaseLimit;
         if (dealLimit > 0) {
-          const dealCursor = c.deals.mode === 'daily-digest' ? { offset: 0, pending: [], end: false } : job.dealCursor;
-          const found = await o.provider.discover('deal', dealCursor, dealLimit);
-          stats.discovered += found.discovered;
-          for (const id of found.ids) dealGames.push(await get(id));
-          if (c.deals.mode === 'instant') job.dealCursor = found.cursor;
-          if (found.completedCycle || c.deals.mode === 'daily-digest') job.dealBaseline = true;
+          if (c.deals.mode === 'daily-digest') {
+            const recent = await repo.recentlySentDealIds(c, started - c.deals.repeatWindowDays * DAY);
+            const candidates: number[] = [], seen = new Set<number>();
+            let cursor = { offset: 0, pending: [] as number[], end: false };
+            while (candidates.length < dealLimit) {
+              const found = await o.provider.discover('deal', cursor, c.source.pageSize);
+              stats.discovered += found.discovered; cursor = found.cursor;
+              for (const id of found.ids) {
+                if (seen.has(id)) continue;
+                seen.add(id);
+                if (recent.has(id)) { omit('recently_sent'); continue; }
+                candidates.push(id);
+                if (candidates.length >= dealLimit) break;
+              }
+              if (found.completedCycle) break;
+            }
+            for (const id of candidates) dealGames.push(await get(id));
+            job.dealBaseline = true;
+          } else {
+            const found = await o.provider.discover('deal', job.dealCursor, dealLimit);
+            stats.discovered += found.discovered;
+            for (const id of found.ids) dealGames.push(await get(id));
+            job.dealCursor = found.cursor;
+            if (found.completedCycle) job.dealBaseline = true;
+          }
         }
         if (releaseLimit > 0) {
           const found = await o.provider.discover('release', job.releaseCursor, releaseLimit);

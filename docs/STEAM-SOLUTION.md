@@ -67,7 +67,7 @@ El webhook se guarda en Script Properties, nunca en el código. El script limita
 
 ## Decisión seleccionada: proceso propio Steam → D1 → Discord
 
-El propietario aceptó el 2 de septiembre de 2026 la cobertura parcial y el riesgo de estabilidad ya documentados. El Worker consultará una vez al día hasta diez candidatos de la primera página de ofertas para juegos, ordenada por reseñas; validará cada ficha para Chile, exigirá `CLP`, aplicará los filtros y enviará un solo resumen. Los disparos cada treinta minutos sirven para alcanzar el horario local y procesar reintentos, no para volver a consultar ofertas durante el mismo día.
+El propietario aceptó el 2 de septiembre de 2026 la cobertura parcial y el riesgo de estabilidad ya documentados. Desde el 3 de septiembre, el Worker puede recorrer hasta cinco páginas de diez identificadores, omite antes de consultar los juegos publicados durante los siete días anteriores y verifica como máximo diez fichas. Después valida Chile y `CLP`, aplica los filtros, ordena localmente por descuento y envía un solo resumen, aunque tenga menos de diez resultados. Los disparos cada treinta minutos sirven para alcanzar el horario local y procesar reintentos, no para volver a consultar ofertas durante el mismo día.
 
 La API pública propia queda aplazada: el único consumidor actual es Discord y exponer un endpoint añade autenticación y superficie de abuso sin mejorar la fuente. Los datos normalizados permanecen en D1 y el adaptador separado permite añadir una API privada más adelante.
 

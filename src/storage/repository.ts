@@ -57,6 +57,12 @@ export class Repository {
     const rows = await this.query(`SELECT app_id,data FROM deal_state WHERE destination=? AND country=? AND app_id IN (${ids.map(() => '?').join(',')})`, c.destinationId, c.country, ...ids);
     return new Map(rows.map(r => [Number(r.app_id), JSON.parse(String(r.data))]));
   }
+  async recentlySentDealIds(c: Config, since: number): Promise<Set<number>> {
+    const rows = await this.query(`SELECT DISTINCT CAST(json_extract(item.value,'$.appId') AS INTEGER) AS app_id
+      FROM outbox, json_each(outbox.games) AS item
+      WHERE destination=? AND country=? AND kind='deal' AND status='sent' AND updated_at>?`, c.destinationId, c.country, since);
+    return new Set(rows.map(r => Number(r.app_id)).filter(Number.isSafeInteger));
+  }
   async watchIds(c: Config, after: number, limit: number): Promise<number[]> {
     return (await this.query("SELECT app_id FROM deal_state WHERE destination=? AND country=? AND json_extract(data,'$.active')=1 AND app_id>? ORDER BY app_id LIMIT ?", c.destinationId, c.country, after, limit)).map(r => Number(r.app_id));
   }

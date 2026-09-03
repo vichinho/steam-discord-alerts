@@ -19,7 +19,7 @@ Está construido en TypeScript con dos ejecutores gratuitos e independientes:
 | Objetos de Rust | GitHub Actions + Skinport | Desde las 13:00 | Activo |
 | Tienda web de Facepunch | — | — | Desactivado por falta de una API adecuada |
 
-Steam consulta una muestra acotada de la tienda regional y selecciona hasta diez juegos con un descuento mínimo inicial de 50 %. Skinport compara el precio mínimo con su precio sugerido, exige al menos diez unidades y selecciona hasta cinco objetos con una diferencia mínima de 20 %.
+Steam consulta hasta cinco páginas acotadas de la tienda regional, excluye juegos publicados durante los últimos siete días y selecciona hasta diez alternativas con un descuento mínimo inicial de 50 %. Si no encuentra suficientes juegos distintos, envía un resumen más corto. Skinport compara el precio mínimo con su precio sugerido, exige al menos diez unidades y selecciona hasta cinco objetos con una diferencia mínima de 20 %.
 
 Los precios no se convierten entre monedas: Steam se muestra en **CLP** y Skinport en **USD**.
 
@@ -58,7 +58,7 @@ npm ci
 npm run validate
 ```
 
-`validate` ejecuta la comprobación de TypeScript, 44 pruebas automatizadas, una simulación sin red y una compilación de Wrangler sin despliegue.
+`validate` ejecuta la comprobación de TypeScript, 45 pruebas automatizadas, una simulación sin red y una compilación de Wrangler sin despliegue.
 
 Otros comandos útiles:
 
@@ -82,6 +82,7 @@ La configuración versionada vive en [`config/bot.json`](config/bot.json). Los v
 | Moneda de Steam | Peso chileno (`CLP`) |
 | Descuento mínimo de Steam | 50 % |
 | Máximo de ofertas de Steam | 10 por resumen |
+| Ventana sin repetir juegos | 7 días |
 | Moneda de Skinport | Dólar estadounidense (`USD`) |
 | Diferencia mínima de Skinport | 20 % bajo el precio sugerido |
 | Liquidez mínima de Skinport | 10 unidades |

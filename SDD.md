@@ -1,7 +1,7 @@
 # SDD — Avisos de Steam para un servidor de Discord
 
 **Tipo:** Software Design Document / Documento de diseño de software  
-**Versión:** 1.2 — 2 de septiembre de 2026  
+**Versión:** 1.3 — 3 de septiembre de 2026
 **Estado:** proceso propio activo; primer resumen real confirmado, observación operativa en curso.  
 **Uso:** personal, un servidor de Discord, sin monetización.  
 **Presupuesto de alojamiento:** USD 0; no habilitar planes ni componentes de pago.
@@ -42,7 +42,7 @@ No son preferencias confirmadas. Permiten implementar sin bloquear el trabajo po
 | Géneros incluidos | Todos; lista configurable con coincidencia de cualquiera |
 | Productos | Juegos base; excluir DLC, demos, software, bandas sonoras y paquetes |
 | Early Access | Incluir y etiquetar cuando el dato esté disponible |
-| Ofertas | Un resumen diario desde las 12:00 de Santiago; hasta 10 juegos de la primera página por reseñas, ordenados localmente por descuento |
+| Ofertas | Un resumen diario desde las 12:00 de Santiago; hasta 10 juegos no publicados en los 7 días anteriores, descubiertos en hasta 5 páginas por reseñas y ordenados localmente por descuento |
 | Descubrimiento de estrenos | Cada 6 horas |
 | Resumen de estrenos | A las 20:00 de Santiago, o en la primera ejecución posterior exitosa |
 | Ventana de estrenos | Últimos 7 días, sin repetir los ya anunciados |
@@ -175,7 +175,7 @@ La búsqueda de ofertas ocurre una vez al día desde las 12:00 de Santiago; la d
 ### 7.2 Ofertas
 
 1. Adquirir un bloqueo temporal en D1 y leer configuración y cursor.
-2. Descubrir un lote pequeño y comprobar detalles faltantes.
+2. Recorrer hasta cinco páginas pequeñas, excluir identificadores publicados en los siete días anteriores y comprobar como máximo diez fichas.
 3. Exigir juego base, disponible en la región, moneda correcta y precio válido.
 4. Aplicar todos los filtros activos: descuento mínimo, máximo de precio y géneros.
 5. Ordenar por descuento descendente, precio ascendente y `appId` como desempate.
@@ -183,7 +183,7 @@ La búsqueda de ofertas ocurre una vez al día desde las 12:00 de Santiago; la d
 7. Reservar una única entrega para la fecha local.
 8. Publicar y registrar la respuesta de Discord; liberar bloqueo.
 
-El resumen puede volver a incluir una oferta vigente en días posteriores porque su propósito es mostrar una selección diaria. Nunca se envía más de un resumen de ofertas para la misma fecha local. La ausencia del juego en la página consultada no prueba que la oferta terminó.
+El resumen no vuelve a incluir un juego enviado durante los siete días anteriores. Si no existen suficientes alternativas válidas, contiene menos de diez juegos o no se publica. Al cumplirse la ventana, una oferta todavía vigente puede volver a aparecer. Nunca se envía más de un resumen de ofertas para la misma fecha local. La ausencia del juego en las páginas consultadas no prueba que la oferta terminó.
 
 Las entregas pendientes de ofertas caducan a las 24 horas y deben revalidarse si su observación tiene más de 30 minutos. Los excedentes se contabilizan como omitidos por cupo, no se acumulan indefinidamente.
 
