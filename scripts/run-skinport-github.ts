@@ -20,12 +20,17 @@ if (!rules.accessReviewed || !rules.coverageAccepted) throw new Error('SKINPORT_
 const statePath = process.env.SKINPORT_STATE_PATH?.trim() || 'data/skinport-state.json';
 const send = process.env.SKINPORT_SEND_CONFIRM === 'YES';
 const now = Date.now();
-const day = localTime(now, config.timezone).day;
+const local = localTime(now, config.timezone);
+const day = local.day;
 let state: State = { lastSentDay: null, messageId: null, sentAt: null };
 try { state = JSON.parse(await readFile(statePath, 'utf8')) as State; } catch (error) {
   if (!(error instanceof Error) || !('code' in error) || error.code !== 'ENOENT') throw error;
 }
 
+if (send && process.env.SKINPORT_SCHEDULED === 'YES' && local.time < rules.digestAt) {
+  console.log(JSON.stringify({ status: 'not_due', day, localTime: local.time, digestAt: rules.digestAt }));
+  process.exit(0);
+}
 if (send && state.lastSentDay === day) {
   console.log(JSON.stringify({ status: 'already_sent', day }));
   process.exit(0);

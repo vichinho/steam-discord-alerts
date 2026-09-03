@@ -44,6 +44,7 @@ jobs:
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           SKINPORT_SEND_CONFIRM: ${{ (github.event_name == 'schedule' || inputs.send) && 'YES' || 'NO' }}
+          SKINPORT_SCHEDULED: ${{ github.event_name == 'schedule' && 'YES' || 'NO' }}
         run: npm run skinport:github
 
       - name: Persist successful delivery state
