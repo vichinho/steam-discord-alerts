@@ -87,7 +87,9 @@ export async function runOnce(o: EngineOptions): Promise<RunStats> {
             const recent = await repo.recentlySentDealIds(c, started - c.deals.repeatWindowDays * DAY);
             const candidates: number[] = [], seen = new Set<number>();
             let cursor = { offset: 0, pending: [] as number[], end: false };
-            while (candidates.length < dealLimit) {
+            let pages = 0;
+            while (candidates.length < dealLimit && pages < c.source.maxPages) {
+              pages++;
               const found = await o.provider.discover('deal', cursor, c.source.pageSize);
               stats.discovered += found.discovered; cursor = found.cursor;
               for (const id of found.ids) {
