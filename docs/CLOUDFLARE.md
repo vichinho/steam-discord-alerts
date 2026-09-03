@@ -16,15 +16,15 @@ Actualizado el 3 de septiembre de 2026. Cuenta Free confirmada explícitamente p
 | Tamaño observado | 139.264 bytes |
 | Historial de activación | Primer resumen real entregado el 2 de septiembre de 2026 |
 | Worker | `steam-discord-alerts` |
-| Versión actual | `2a56c7b8-235c-4d82-994c-d0452d91f996` |
+| Versión actual | `5c56a760-4e6e-47af-8010-7a93b97295f8` |
 | Subdominio de cuenta | `vishoxcl.workers.dev`, visible en la captura del propietario |
 | Despliegue actual | Finalizado correctamente; cron `*/30 * * * *` |
-| Paquete | 69,87 KiB; gzip 18,76 KiB |
-| Startup informado en el despliegue actual | 7 ms; NO es CPU por revisión ni p95 de operación |
+| Paquete | 69,95 KiB; gzip 18,78 KiB |
+| Startup informado en el despliegue actual | 5 ms; NO es CPU por revisión ni p95 de operación |
 
 `enabled=true`, `source.enabled=true`, `accessReviewed=true`, `coverageAccepted=true`, `cloudValidated=true` y `sendEnabled=true`. El secreto `DISCORD_WEBHOOK_URL` y los IDs del canal autorizado `⋮💲⋮ofertas` están configurados. El Worker mantiene `workers_dev=false`, `preview_urls=false`, `routes=[]` y cron `*/30 * * * *`.
 
-La versión actual es `2a56c7b8-235c-4d82-994c-d0452d91f996`. Conserva el formato visual aprobado y evita repetir durante siete días los juegos incluidos en resúmenes confirmados. Antes de verificar precios puede recorrer hasta cinco páginas para buscar alternativas y mantiene el máximo de diez fichas por ejecución. Skinport está desactivado dentro del Worker porque su API respondió 403 desde Cloudflare; su tarea independiente funciona mediante GitHub Actions. El cron de Steam permanece en `*/30 * * * *`.
+La versión actual es `5c56a760-4e6e-47af-8010-7a93b97295f8`. Conserva el formato visual aprobado y evita repetir durante siete días los juegos incluidos en resúmenes confirmados. Antes de verificar precios puede recorrer hasta cinco páginas para buscar alternativas y mantiene el máximo de diez fichas por ejecución. Skinport está desactivado dentro del Worker porque su API respondió 403 desde Cloudflare; su tarea independiente funciona mediante GitHub Actions. El cron de Steam permanece en `*/30 * * * *`.
 
 ## Inicialización de cuenta completada
 
