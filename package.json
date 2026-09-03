@@ -14,6 +14,7 @@
     "preview:steam": "node scripts/preview-steam.ts",
     "probe:rust-products": "node scripts/probe-rust-products.ts",
     "probe:skinport": "node scripts/probe-skinport.ts",
+    "skinport:github": "node scripts/run-skinport-github.ts",
     "build": "wrangler deploy --dry-run --outdir dist",
     "db:local": "wrangler d1 migrations apply DB --local",
     "recovery:sql": "node scripts/recovery-sql.ts",

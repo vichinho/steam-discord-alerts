@@ -10,7 +10,9 @@ La [tienda oficial de Rust](https://rust.facepunch.com/store/) publica un catál
 
 El propietario eligió Skinport como fuente de objetos. Su endpoint documentado no requiere autenticación, admite `app_id=252490`, publica precio sugerido, mínimo y cantidad, pero no ofrece CLP. Se adoptó USD sin conversión y el texto evita presentarlo como descuento oficial de Steam. La [prueba local](evidence/skinport-local-2026-09-02.json) obtuvo 5.376 objetos y 730 candidatos con la regla inicial.
 
-La prueba desde Cloudflare devolvió HTTP 403 con Brotli requerido, negociación automática y lista estándar de codificaciones. Por ello el módulo está implementado pero `enabled=false`: el Worker actual no puede usar esta fuente. No se añadirá un proxy anónimo. Se añadió un flujo manual y sin secretos en GitHub Actions para validar si Skinport acepta esa red antes de implementar publicaciones. La alternativa restante es ejecutarlo en el PC cuando esté encendido.
+La prueba desde Cloudflare devolvió HTTP 403 con Brotli requerido, negociación automática y lista estándar de codificaciones. Por ello el módulo permanece `enabled=false` dentro del Worker: Cloudflare no puede usar esta fuente. No se añadirá un proxy anónimo. GitHub Actions sí obtuvo HTTP 200 el 3 de septiembre de 2026, por lo que ejecutará este módulo de forma independiente. La alternativa restante es ejecutarlo en el PC cuando esté encendido.
+
+El flujo `Skinport daily digest` consulta a las 13:07 de Santiago bajo UTC-3 y UTC-4, publica como máximo un resumen diario y registra el día y el identificador del mensaje en `data/skinport-state.json`. La segunda ejecución UTC del día se detiene al encontrar ese estado. La programación solo se activa cuando la variable del repositorio `SKINPORT_ENABLED` vale `true`; el webhook se guarda exclusivamente como secreto `DISCORD_WEBHOOK_URL`.
 
 ## Productos de Rust publicados en Steam — fuente viable
 
@@ -79,7 +81,7 @@ Las claves lógicas separan `rust_official_promotion`, `rust_official_new` y `ru
 1. Implementar el proveedor de productos Steam de Rust, su línea base, persistencia y pruebas.
 2. Medir ese proveedor desde Cloudflare sin Discord y realizar una prueba controlada.
 3. Obtener permiso o una fuente documentada para la tienda web de Facepunch.
-4. Crear un ejecutor gratuito en GitHub Actions y validar que Skinport acepte su red; conservar Cloudflare para Steam.
-5. Guardar el webhook como secreto del repositorio, ejecutar inicialmente sin envíos y activar solo tras una prueba controlada.
+4. Guardar el webhook como secreto del repositorio.
+5. Ejecutar una prueba controlada y después activar la variable `SKINPORT_ENABLED`.
 
 Hasta completar esos puntos, esta extensión no cambia el comportamiento desplegado.

@@ -1,21 +1,35 @@
-name: Skinport network probe
+name: Skinport daily digest
 
 on:
   workflow_dispatch:
+    inputs:
+      send:
+        description: Publish the selected items to Discord
+        required: true
+        default: false
+        type: boolean
+  schedule:
+    # 13:07 in Santiago under both UTC-3 and UTC-4. The state file prevents duplicates.
+    - cron: "7 16,17 * * *"
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: skinport-daily-digest
+  cancel-in-progress: false
 
 jobs:
-  probe:
+  digest:
+    if: github.event_name == 'workflow_dispatch' || vars.SKINPORT_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 24
           cache: npm
@@ -26,5 +40,22 @@ jobs:
       - name: Validate project
         run: npm run check
 
-      - name: Probe documented Skinport endpoint
-        run: npm run probe:skinport
+      - name: Fetch and select Rust items
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          SKINPORT_SEND_CONFIRM: ${{ (github.event_name == 'schedule' || inputs.send) && 'YES' || 'NO' }}
+        run: npm run skinport:github
+
+      - name: Persist successful delivery state
+        if: success()
+        shell: bash
+        run: |
+          if git diff --quiet -- data/skinport-state.json; then
+            exit 0
+          fi
+          git config user.name "steam-discord-alerts"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/skinport-state.json
+          git commit -m "chore(state): record Skinport delivery"
+          git pull --rebase origin main
+          git push origin HEAD:main
