@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "steam-discord-alerts",
+  "account_id": "1a34b5be2268451206bab50368af9890",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-08-31",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [],
+  // Cada 30 minutos para reintentos y horario local; las ofertas se consultan y resumen solo una vez por día.
+  "triggers": { "crons": ["*/30 * * * *"] },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "steam-discord-alerts",
+    "database_id": "53a3b0f4-d7dc-4f3b-a4aa-dbe31fadaae2",
+    "migrations_dir": "migrations"
+  }],
+  "observability": { "enabled": true, "head_sampling_rate": 1 }
+}

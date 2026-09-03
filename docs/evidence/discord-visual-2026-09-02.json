@@ -1,0 +1,33 @@
+{
+  "observedAt": "2026-09-02T23:50:53Z",
+  "workerVersionAfterRestoringCron": "bbc3d426-793d-4de6-981c-0dfe1578b51a",
+  "destinationId": "1544098060924362943",
+  "country": "CL",
+  "currency": "CLP",
+  "reason": "Repetición solicitada por el propietario para validar el nuevo formato visual",
+  "run": {
+    "id": "ff8c6c74-aee0-4a79-9617-2569490dc226",
+    "status": "ok",
+    "discovered": 25,
+    "checked": 10,
+    "eligible": 5,
+    "sent": 1,
+    "failed": 0
+  },
+  "delivery": {
+    "key": "deal-digest:1544098060924362943:CL:2026-09-02",
+    "status": "sent",
+    "messageId": "1544857176290623616",
+    "error": null
+  },
+  "deduplication": {
+    "dealDigestDay": "2026-09-02",
+    "normalDailyLimitRestored": true
+  },
+  "notes": [
+    "El primer mensaje se conservó como registro histórico y el propietario indicó que lo borraría de Discord",
+    "La ejecución de prueba usó el manejador scheduled con recursos remotos",
+    "El cron final quedó restaurado a */30 * * * *",
+    "El secreto del webhook no se leyó ni se incluyó en esta evidencia"
+  ]
+}

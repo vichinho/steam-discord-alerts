@@ -1,0 +1,30 @@
+{
+  "observedAt": "2026-09-02T23:18:01Z",
+  "workerVersion": "a6b03dab-bd9d-486a-ad7d-42934940f713",
+  "destinationId": "1544098060924362943",
+  "country": "CL",
+  "currency": "CLP",
+  "run": {
+    "status": "ok",
+    "discovered": 25,
+    "checked": 10,
+    "eligible": 5,
+    "sent": 1,
+    "failed": 0
+  },
+  "delivery": {
+    "key": "deal-digest:1544098060924362943:CL:2026-09-02:legacy-1544848905395769415",
+    "day": "2026-09-02-original",
+    "status": "sent",
+    "messageId": "1544848905395769415",
+    "error": null
+  },
+  "deduplication": {
+    "dealDigestDay": "2026-09-02"
+  },
+  "notes": [
+    "Discord devolvió el identificador del mensaje mediante wait=true",
+    "El secreto del webhook no se leyó ni se incluyó en esta evidencia",
+    "El cron final quedó restaurado a */30 * * * *"
+  ]
+}

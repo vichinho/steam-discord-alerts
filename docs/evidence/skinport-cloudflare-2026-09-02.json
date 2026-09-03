@@ -1,0 +1,15 @@
+{
+  "observedAt": "2026-09-03T00:17:00Z",
+  "environment": "Cloudflare Workers remote development network",
+  "endpoint": "https://api.skinport.com/v1/items",
+  "appId": 252490,
+  "currency": "USD",
+  "variants": [
+    { "name": "required-br", "status": 403 },
+    { "name": "automatic-encoding", "status": 403 },
+    { "name": "standard-encoding-list", "status": 403 }
+  ],
+  "deliveriesCreated": 0,
+  "messagesSent": 0,
+  "decision": "Keep the Skinport module disabled on Cloudflare and validate another free executor"
+}

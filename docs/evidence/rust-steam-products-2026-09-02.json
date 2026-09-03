@@ -1,0 +1,22 @@
+{
+  "observedAt": "2026-09-03T00:02:33.549Z",
+  "source": "Steam Store regional product details",
+  "baseAppId": 252490,
+  "country": "CL",
+  "currency": "CLP",
+  "totalRelatedProducts": 5,
+  "checked": 5,
+  "discounted": 0,
+  "products": [
+    { "appId": 3891560, "name": "Rust - Warhammer 40,000 Pack", "type": "dlc", "amount": 730000, "discountPercent": 0 },
+    { "appId": 1174370, "name": "Rust - Instruments Pack", "type": "dlc", "amount": 450000, "discountPercent": 0 },
+    { "appId": 1353060, "name": "Rust - Sunburn Pack", "type": "dlc", "amount": 450000, "discountPercent": 0 },
+    { "appId": 1670430, "name": "Rust - Voice Props Pack", "type": "dlc", "amount": 570000, "discountPercent": 0 },
+    { "appId": 1701720, "name": "Rust Soundtrack", "type": "music", "amount": 450000, "discountPercent": 0 }
+  ],
+  "notes": [
+    "amount usa amountScale=100",
+    "La prueba no consultó la web de Facepunch ni el Mercado de la Comunidad",
+    "No se enviaron mensajes a Discord"
+  ]
+}

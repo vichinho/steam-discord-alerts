@@ -1,0 +1,15 @@
+{
+  "10001": {
+    "success": true,
+    "data": {
+      "steam_appid": 10001,
+      "name": "Juego ficticio de prueba",
+      "type": "game",
+      "is_free": false,
+      "genres": [{ "id": "1", "description": "Action" }],
+      "header_image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/10001/header.jpg",
+      "price_overview": { "currency": "CLP", "initial": 2000000, "final": 1000000, "discount_percent": 50 },
+      "release_date": { "coming_soon": false, "date": "30 Aug, 2026" }
+    }
+  }
+}

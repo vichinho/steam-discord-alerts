@@ -1,0 +1,14 @@
+{
+  "observedAt": "2026-09-03T00:07:14.499Z",
+  "environment": "Windows local",
+  "endpoint": "https://api.skinport.com/v1/items",
+  "appId": 252490,
+  "currency": "USD",
+  "status": 200,
+  "contentEncoding": "br",
+  "decompressedBytes": 2060591,
+  "items": 5376,
+  "rule": { "minDropPercent": 20, "minQuantity": 10 },
+  "eligible": 730,
+  "messagesSent": 0
+}

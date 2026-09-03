@@ -1,0 +1,145 @@
+{
+  "observedAt": "2026-09-02T23:00:06.522Z",
+  "environment": "local-windows-node",
+  "country": "CL",
+  "permissionStatus": "NOT_CONFIRMED",
+  "cloudValidation": "PENDING",
+  "coverage": "Ofertas: primera página de juegos rebajados ordenada por reseñas, hasta 10 candidatos y resumen diario; se ordenan localmente por descuento. Estrenos: hasta 5 páginas de 10 candidatos por recorrido. Cobertura parcial aceptada por el propietario; adaptador de tienda no documentado por Valve y sujeto a pausa si cambia o rechaza el acceso.",
+  "control": {
+    "appId": 620,
+    "title": "Portal 2",
+    "storeUrl": "https://store.steampowered.com/app/620/",
+    "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/header.jpg?t=1745363004",
+    "productType": "game",
+    "genres": [
+      "1",
+      "25"
+    ],
+    "earlyAccess": false,
+    "country": "CL",
+    "currency": "CLP",
+    "originalAmount": 575000,
+    "currentAmount": 575000,
+    "discountPercent": 0,
+    "amountScale": 100,
+    "releaseDate": "2011-04-18",
+    "releasePrecision": "day",
+    "comingSoon": false,
+    "availableInRegion": true,
+    "observedAt": 1788390006947,
+    "source": "steam-store-experimental",
+    "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=620&cc=cl&l=english",
+    "promotionEndsAt": null
+  },
+  "deal": {
+    "discovery": {
+      "ids": [
+        1696770
+      ],
+      "discovered": 25,
+      "completedCycle": false,
+      "cursor": {
+        "offset": 10,
+        "pending": [
+          2206340,
+          1684410,
+          1070550,
+          2059670,
+          2393760,
+          1794680,
+          1089980,
+          1230140,
+          1533420
+        ],
+        "end": false
+      }
+    },
+    "sample": {
+      "appId": 1696770,
+      "title": "The Mermaid Mask",
+      "storeUrl": "https://store.steampowered.com/app/1696770/",
+      "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1696770/7fb7b905c4004e882bc7671e55507acadc5cd5bb/header.jpg?t=1784233084",
+      "productType": "game",
+      "genres": [
+        "25",
+        "4",
+        "23"
+      ],
+      "earlyAccess": false,
+      "country": "CL",
+      "currency": "CLP",
+      "originalAmount": 1199900,
+      "currentAmount": 1079900,
+      "discountPercent": 10,
+      "amountScale": 100,
+      "releaseDate": "2026-07-16",
+      "releasePrecision": "day",
+      "comingSoon": false,
+      "availableInRegion": true,
+      "observedAt": 1788390007442,
+      "source": "steam-store-experimental",
+      "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=1696770&cc=cl&l=english",
+      "promotionEndsAt": null
+    }
+  },
+  "release": {
+    "discovery": {
+      "ids": [
+        3751260
+      ],
+      "discovered": 25,
+      "completedCycle": false,
+      "cursor": {
+        "offset": 10,
+        "pending": [
+          3561380,
+          5091820,
+          5094220,
+          4746070,
+          4290180,
+          4219890,
+          2445260,
+          3121010,
+          4336400
+        ],
+        "end": false
+      }
+    },
+    "sample": {
+      "appId": 3751260,
+      "title": "The Blood of Dawnwalker",
+      "storeUrl": "https://store.steampowered.com/app/3751260/",
+      "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3751260/a7062f3b59d491c2678e3fd7ce2672858e480641/header.jpg?t=1788387095",
+      "productType": "game",
+      "genres": [
+        "1",
+        "25",
+        "3"
+      ],
+      "earlyAccess": false,
+      "country": "CL",
+      "currency": "CLP",
+      "originalAmount": 5049900,
+      "currentAmount": 5049900,
+      "discountPercent": 0,
+      "amountScale": 100,
+      "releaseDate": "2026-09-02",
+      "releasePrecision": "day",
+      "comingSoon": false,
+      "availableInRegion": true,
+      "observedAt": 1788390007953,
+      "source": "steam-store-experimental",
+      "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=3751260&cc=cl&l=english",
+      "promotionEndsAt": null
+    }
+  },
+  "technicalStatus": "LOCAL_SAMPLE_OK_NOT_FULL_VALIDATION",
+  "metrics": {
+    "requests": 5,
+    "details": 3,
+    "responseBytes": 203739,
+    "wallMs": 1432,
+    "localProcessCpuMs": 265,
+    "note": "CPU de Node local: no mide ni certifica CPU de Workers."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "steam-discord-alerts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24.14.0 <25" },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "node --test tests/*.test.ts",
+    "simulate": "node scripts/simulate.ts",
+    "discord:preview": "node scripts/test-discord.ts",
+    "discord:send-test": "node scripts/test-discord.ts --send",
+    "probe:steam": "node scripts/probe-steam.ts",
+    "preview:steam": "node scripts/preview-steam.ts",
+    "probe:rust-products": "node scripts/probe-rust-products.ts",
+    "probe:skinport": "node scripts/probe-skinport.ts",
+    "build": "wrangler deploy --dry-run --outdir dist",
+    "db:local": "wrangler d1 migrations apply DB --local",
+    "recovery:sql": "node scripts/recovery-sql.ts",
+    "validate": "npm run check && npm test && npm run simulate && npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.3",
+    "typescript": "7.0.2",
+    "wrangler": "4.127.1"
+  }
+}

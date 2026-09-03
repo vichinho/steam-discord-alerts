@@ -1,0 +1,10 @@
+import { mkdir, writeFile } from 'node:fs/promises';
+import { parseArgs } from 'node:util';
+const { values } = parseArgs({ options: { key: { type: 'string' }, 'message-id': { type: 'string' }, 'not-sent': { type: 'boolean' } } });
+if (!values.key || !/^(deal|digest):[a-zA-Z0-9:_-]+$/.test(values.key) || Boolean(values['message-id']) === Boolean(values['not-sent'])) throw new Error('Uso: --key CLAVE --message-id ID, o --key CLAVE --not-sent');
+if (values['message-id'] && !/^\d{17,22}$/.test(values['message-id'])) throw new Error('ID de mensaje inválido');
+const status = values['not-sent'] ? 'failed' : 'sent';
+const sql = `-- Revisar el canal y pausar el cron antes de ejecutar. No reenvía mensajes.\nUPDATE outbox SET status='${status}',message_id=${values['message-id'] ? "'" + values['message-id'] + "'" : 'NULL'},error='MANUAL_${values['not-sent'] ? 'NOT_SENT' : 'CONFIRMED'}',updated_at=unixepoch()*1000\nWHERE key='${values.key}' AND status='uncertain'\nAND NOT EXISTS(SELECT 1 FROM leases WHERE name='cron' AND expires_at>unixepoch()*1000)\nRETURNING key,status,message_id;\n`;
+await mkdir(new URL('../.local/', import.meta.url), { recursive: true });
+await writeFile(new URL('../.local/recovery.sql', import.meta.url), sql);
+console.log('SQL preparado en .local/recovery.sql. Revisarlo antes de ejecutarlo; no se conectó a Cloudflare ni Discord.');

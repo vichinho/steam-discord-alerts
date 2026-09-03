@@ -1,0 +1,24 @@
+{
+  "observedAt": "2026-09-02T23:05:00Z",
+  "environment": "cloudflare-remote-preview-with-production-d1",
+  "workerVersionAfterValidation": "5b455515-61ff-4f6c-a1c5-d10621be8325",
+  "country": "CL",
+  "currency": "CLP",
+  "status": "ok",
+  "source": "ok",
+  "discovered": 25,
+  "checked": 10,
+  "eligible": 5,
+  "sent": 0,
+  "failed": 0,
+  "storedMetricsBeforeRunRecordAndUnlock": {
+    "requests": 19,
+    "rowsRead": 27,
+    "rowsWritten": 65
+  },
+  "notes": [
+    "sendEnabled=false durante toda la prueba",
+    "La consulta posterior a D1 confirmó el registro de la ejecución",
+    "La duración de pared y el startup del Worker no equivalen a CPU facturable"
+  ]
+}
